@@ -342,7 +342,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:text="@string/grades_stats_university"
-        android:textAppearance="@style/NavView.TextView.Subtitle" />
+        android:textAppearance="?textAppearanceTitleLarge" />
 
     <LinearLayout
         android:id="@+id/universityLayout"

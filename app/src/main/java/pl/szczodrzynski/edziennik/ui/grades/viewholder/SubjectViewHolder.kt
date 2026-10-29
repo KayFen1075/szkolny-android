@@ -63,7 +63,7 @@ class SubjectViewHolder(
         if (manager.isUniversity) {
             val ectsPoints = item.semesters.firstOrNull()?.grades?.maxOf { it.weight }
             b.yearSummary.text = if (ectsPoints != null)
-                contextWrapper.getString(
+                activity.getString(
                     R.string.grades_ects_points_format,
                     ectsPoints
                 )

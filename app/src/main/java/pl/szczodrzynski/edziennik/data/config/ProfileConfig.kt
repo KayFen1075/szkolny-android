@@ -47,7 +47,7 @@ class ProfileConfig(
         var dontCountEnabled by config<Boolean>(false)
         var dontCountGrades by config<List<String>> { listOf() }
         var hideImproved by config<Boolean>(false)
-        var hideNoGrade by base.config<Boolean>(false)
+        var hideNoGrade by config<Boolean>(false)
         var hideSticksFromOld by config<Boolean>(false)
         var minusValue by config<Float?>(null)
         var plusValue by config<Float?>(null)
