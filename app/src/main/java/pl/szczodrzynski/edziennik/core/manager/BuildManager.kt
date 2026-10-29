@@ -258,6 +258,10 @@ class BuildManager(val app: App) : CoroutineScope {
             if (isSigned)
                 return@launch
 
+            // personal build, not published - nothing to validate
+            if (buildFlavor == "kayfen")
+                return@launch
+
             // seems official, but unsigned
             if (isPlayRelease || isApkRelease) {
                 invalidateBuild(activity, null, InvalidBuildReason.OFFICIAL_UNSIGNED)
