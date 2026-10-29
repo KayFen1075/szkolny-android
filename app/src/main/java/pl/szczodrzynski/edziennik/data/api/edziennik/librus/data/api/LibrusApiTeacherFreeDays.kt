@@ -5,6 +5,7 @@
 package pl.szczodrzynski.edziennik.data.api.edziennik.librus.data.api
 
 import androidx.core.util.isEmpty
+import pl.szczodrzynski.edziennik.data.api.ERROR_LIBRUS_API_RESOURCE_ACCESS_DENIED
 import pl.szczodrzynski.edziennik.data.api.edziennik.librus.DataLibrus
 import pl.szczodrzynski.edziennik.data.api.edziennik.librus.ENDPOINT_LIBRUS_API_TEACHER_FREE_DAYS
 import pl.szczodrzynski.edziennik.data.api.edziennik.librus.data.LibrusApi
@@ -29,7 +30,8 @@ class LibrusApiTeacherFreeDays(override val data: DataLibrus,
             data.db.teacherAbsenceTypeDao().getAllNow(profileId).toSparseArray(data.teacherAbsenceTypes) { it.id }
         }
 
-        apiGet(TAG, "TeacherFreeDays") { json ->
+        // some schools deny access to teachers' free days
+        apiGet(TAG, "TeacherFreeDays", ignoreErrors = listOf(ERROR_LIBRUS_API_RESOURCE_ACCESS_DENIED)) { json ->
             val teacherAbsences = json.getJsonArray("TeacherFreeDays")?.asJsonObjectList()
 
             teacherAbsences?.forEach { teacherAbsence ->
