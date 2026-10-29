@@ -84,6 +84,7 @@ class BuildManager(val app: App) : CoroutineScope {
     }
 
     val versionBadge = when {
+        buildFlavor == "kayfen" -> null
         isSigned && isNightly ->
             "Nightly\n" + BuildConfig.VERSION_NAME.substringAfterLast('.')
         isSigned && isDaily ->
