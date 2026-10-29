@@ -10,6 +10,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
 import pl.szczodrzynski.edziennik.App
 import pl.szczodrzynski.edziennik.R
 import pl.szczodrzynski.edziennik.core.manager.NoteManager
@@ -58,6 +59,46 @@ class LessonDetailsDialog(
             defaultLesson = lesson,
         ).show()
         return NO_DISMISS
+    }
+
+    private suspend fun updateSkipView() {
+        val visible = lesson.profileId == App.profileId
+                && app.profile.config.skips.showInTimetable
+        val data = if (visible) app.skipManager.getData() else null
+        val subject = data?.subjects?.get(lesson.displaySubjectId)
+        if (data == null || subject == null || subject.isExcluded || !data.isUpcoming(lesson)) {
+            b.skipDivider.isVisible = false
+            b.skipLayout.isVisible = false
+            return
+        }
+        b.skipDivider.isVisible = true
+        b.skipLayout.isVisible = true
+
+        val isPlanned = data.isPlanned(lesson)
+        val status = data.getStatus(lesson)
+        b.skipIcon.setImageDrawable(app.skipManager.getLessonDrawable(activity, data, lesson))
+        b.skipIcon.isVisible = b.skipIcon.drawable != null
+
+        val percent = subject.percent
+        val after = subject.percentAfterSkip(alreadyPlanned = isPlanned)
+        val details = when {
+            percent == null || after == null -> activity.getString(R.string.skips_no_data)
+            else -> activity.getString(R.string.skips_lesson_details_format, percent, after, subject.goal)
+        }
+        val statusName = status?.let { activity.getString(it.nameRes) }
+        val plannedText = if (isPlanned) activity.getString(R.string.skips_planned) else null
+        val hasEvent = if (data.hasEvent(lesson)) activity.getString(R.string.skips_has_event) else null
+        b.skipText.text = listOfNotNull(
+            listOfNotNull(statusName, plannedText).joinToString(" • "),
+            details,
+            hasEvent,
+        ).filter { it.isNotEmpty() }.joinToString("\n")
+
+        b.skipPlan.setText(if (isPlanned) R.string.skips_unplan else R.string.skips_plan)
+        b.skipPlan.onClick {
+            app.skipManager.togglePlanned(lesson)
+            launch { updateSkipView() }
+        }
     }
 
     override suspend fun onShow() {
@@ -165,6 +206,8 @@ class LessonDetailsDialog(
                 ).show()
             }
         }
+
+        updateSkipView()
 
         adapter = EventListAdapter(
             activity,

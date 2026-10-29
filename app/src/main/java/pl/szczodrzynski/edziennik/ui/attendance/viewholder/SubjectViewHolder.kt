@@ -41,6 +41,9 @@ class SubjectViewHolder(
 
         b.attendanceBar.setAttendanceData(item.typeCountMap.map { manager.getAttendanceColor(it.key) to it.value })
 
+        b.skipIcon.isVisible = item.skipStatus != null
+        b.skipIcon.setImageDrawable(item.skipStatus?.toDrawable(activity, sizeDp = 20))
+
         b.percentage.isVisible = true
 
         if (item.percentage == 0f) {

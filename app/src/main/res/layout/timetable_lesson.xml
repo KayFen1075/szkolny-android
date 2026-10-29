@@ -94,6 +94,15 @@
                                 tools:srcCompat="@sample/check"
                                 tools:visibility="visible" />
 
+                            <ImageView
+                                android:id="@+id/skipIcon"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center_vertical"
+                                android:visibility="gone"
+                                tools:srcCompat="@sample/check"
+                                tools:visibility="visible" />
+
                             <TextView
                                 android:id="@+id/lessonNumberText"
                                 android:layout_width="wrap_content"

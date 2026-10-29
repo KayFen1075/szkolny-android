@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) KayFen 2026-10-29.
+  -->
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/goalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?textAppearanceTitleMedium"
+            tools:text="Cel frekwencji: 51%" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="1"
+            android:valueTo="99" />
+
+        <TextView
+            android:id="@+id/marginOkText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Można opuścić: zapas od 10 p.p." />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/marginOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="1"
+            android:valueTo="40" />
+
+        <TextView
+            android:id="@+id/marginEdgeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="Na granicy: zapas poniżej 4 p.p." />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/marginEdge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stepSize="1"
+            android:valueFrom="0"
+            android:valueTo="39" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/skips_settings_counting"
+            android:textAppearance="?textAppearanceTitleMedium" />
+
+        <CheckBox
+            android:id="@+id/belatedAsPresence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skips_settings_belated" />
+
+        <CheckBox
+            android:id="@+id/excusedAsPresence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skips_settings_excused" />
+
+        <Button
+            android:id="@+id/ignoredEventTypes"
+            style="?materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/skips_settings_event_types" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/skips_settings_show"
+            android:textAppearance="?textAppearanceTitleMedium" />
+
+        <CheckBox
+            android:id="@+id/showInTimetable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skips_settings_show_timetable" />
+
+        <CheckBox
+            android:id="@+id/showInAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skips_settings_show_attendance" />
+
+        <CheckBox
+            android:id="@+id/showInHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skips_settings_show_home" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/skips_free_days_title"
+            android:textAppearance="?textAppearanceTitleMedium" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/skips_free_days_hint"
+            android:textAppearance="?textAppearanceBodySmall" />
+
+        <Button
+            android:id="@+id/addFreeDays"
+            style="?materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/skips_free_days_add" />
+
+        <LinearLayout
+            android:id="@+id/freeDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/skips_settings_hint"
+            android:textAppearance="?textAppearanceBodySmall" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -22,6 +22,7 @@ import kotlinx.coroutines.withContext
 import pl.szczodrzynski.edziennik.App
 import pl.szczodrzynski.edziennik.MainActivity
 import pl.szczodrzynski.edziennik.R
+import pl.szczodrzynski.edziennik.core.manager.SkipManager
 import pl.szczodrzynski.edziennik.data.db.entity.Attendance
 import pl.szczodrzynski.edziennik.data.db.full.AttendanceFull
 import pl.szczodrzynski.edziennik.databinding.AttendanceSummaryFragmentBinding
@@ -49,6 +50,7 @@ class AttendanceSummaryFragment : BaseFragment<AttendanceSummaryFragmentBinding,
         get() = app.attendanceManager
     private var expandSubjectId = 0L
     private var attendance = listOf<AttendanceFull>()
+    private var skipData: SkipManager.SkipData? = null
 
     override suspend fun onViewReady(savedInstanceState: Bundle?) {
         expandSubjectId = arguments?.getLong("gradesSubjectId") ?: 0L
@@ -65,6 +67,7 @@ class AttendanceSummaryFragment : BaseFragment<AttendanceSummaryFragmentBinding,
 
             // load & configure the adapter
             attendance = items
+            skipData = getSkipData()
             adapter.items = withContext(Dispatchers.Default) { processAttendance() }
             if (adapter.items.isNotNullNorEmpty() && b.list.adapter == null) {
                 b.list.adapter = adapter
@@ -98,6 +101,17 @@ class AttendanceSummaryFragment : BaseFragment<AttendanceSummaryFragmentBinding,
             AttendanceDetailsDialog(activity, it).show()
         }
 
+        app.skipManager.observeUpdates(this) {
+            this@AttendanceSummaryFragment.launch {
+                skipData = getSkipData()
+                // update the statuses only, so that the expanded subjects stay expanded
+                adapter.items.filterIsInstance<AttendanceSubject>().forEach { subject ->
+                    subject.skipStatus = skipData?.subjects?.get(subject.subjectId)?.getStatus()
+                }
+                adapter.notifyDataSetChanged()
+            }
+        }
+
         b.toggleGroup.check(when (periodSelection) {
             0 -> R.id.allYear
             1 -> R.id.semester1
@@ -128,6 +142,12 @@ class AttendanceSummaryFragment : BaseFragment<AttendanceSummaryFragmentBinding,
             }
         }
     }
+
+    private suspend fun getSkipData() =
+        if (app.profile.config.skips.showInAttendance)
+            app.skipManager.getData(force = true)
+        else
+            null
 
     private fun expandSubject(adapter: AttendanceAdapter) {
         var expandSubjectModel: GradesSubject? = null
@@ -201,6 +221,8 @@ class AttendanceSummaryFragment : BaseFragment<AttendanceSummaryFragmentBinding,
                 0f
             else
                 presenceCount.toFloat() / totalCount.toFloat() * 100f
+
+            subject.skipStatus = skipData?.subjects?.get(subject.subjectId)?.getStatus()
 
             if (!false /* showPresenceInSubject */)
                 subject.items.removeAll { it.baseType == Attendance.TYPE_PRESENT }

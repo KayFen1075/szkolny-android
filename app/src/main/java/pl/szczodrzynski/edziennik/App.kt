@@ -37,6 +37,7 @@ import pl.szczodrzynski.edziennik.core.manager.NoteManager
 import pl.szczodrzynski.edziennik.core.manager.NotificationManager
 import pl.szczodrzynski.edziennik.core.manager.PermissionManager
 import pl.szczodrzynski.edziennik.core.manager.ShortcutManager
+import pl.szczodrzynski.edziennik.core.manager.SkipManager
 import pl.szczodrzynski.edziennik.core.manager.TextStylingManager
 import pl.szczodrzynski.edziennik.core.manager.TimetableManager
 import pl.szczodrzynski.edziennik.core.manager.UiManager
@@ -94,6 +95,7 @@ class App : MultiDexApplication(), Configuration.Provider, CoroutineScope {
     val notificationManager by lazy { NotificationManager(this) }
     val permissionManager by lazy { PermissionManager(this) }
     val shortcutManager by lazy { ShortcutManager(this) }
+    val skipManager by lazy { SkipManager(this) }
     val textStylingManager by lazy { TextStylingManager(this) }
     val timetableManager by lazy { TimetableManager(this) }
     val uiManager by lazy { UiManager(this) }

@@ -25,6 +25,7 @@ import pl.szczodrzynski.edziennik.App
 import pl.szczodrzynski.edziennik.MainActivity
 import pl.szczodrzynski.edziennik.R
 import pl.szczodrzynski.edziennik.core.manager.NoteManager
+import pl.szczodrzynski.edziennik.core.manager.SkipManager
 import pl.szczodrzynski.edziennik.data.api.edziennik.EdziennikTask
 import pl.szczodrzynski.edziennik.data.db.entity.Lesson
 import pl.szczodrzynski.edziennik.data.db.full.AttendanceFull
@@ -77,6 +78,7 @@ class TimetableDayFragment : BaseFragment<TimetableDayFragmentBinding, MainActiv
     private var syncArgs = JsonObject()
 
     private var viewsRemoved = false
+    private var lastLessonData: Triple<List<LessonFull>, List<EventFull>, List<AttendanceFull>>? = null
 
     private val manager
         get() = app.timetableManager
@@ -129,15 +131,31 @@ class TimetableDayFragment : BaseFragment<TimetableDayFragmentBinding, MainActiv
                 val attendanceList = withContext(Dispatchers.Default) {
                     app.db.attendanceDao().getAllByDateNow(App.profileId, date)
                 }
-                processLessonList(lessons, events, attendanceList)
+                lastLessonData = Triple(lessons, events, attendanceList)
+                processLessonList(lessons, events, attendanceList, getSkipData())
+            }
+        }
+
+        // refresh the skip icons when the planned skips change
+        app.skipManager.observeUpdates(this) {
+            val (lessons, events, attendanceList) = lastLessonData ?: return@observeUpdates
+            launch {
+                processLessonList(lessons, events, attendanceList, getSkipData())
             }
         }
     }
+
+    private suspend fun getSkipData() =
+        if (app.profile.config.skips.showInTimetable)
+            app.skipManager.getData()
+        else
+            null
 
     private fun processLessonList(
         lessons: List<LessonFull>,
         events: List<EventFull>,
         attendanceList: List<AttendanceFull>,
+        skipData: SkipManager.SkipData?,
     ) {
         // no lessons - timetable not downloaded yet
         if (lessons.isEmpty()) {
@@ -242,13 +260,14 @@ class TimetableDayFragment : BaseFragment<TimetableDayFragmentBinding, MainActiv
 
         lessons.forEach { it.showAsUnseen = !it.seen }
 
-        buildLessonViews(lessonsActual, events, attendanceList)
+        buildLessonViews(lessonsActual, events, attendanceList, skipData)
     }
 
     private fun buildLessonViews(
         lessons: List<LessonFull>,
         events: List<EventFull>,
         attendanceList: List<AttendanceFull>,
+        skipData: SkipManager.SkipData?,
     ) {
         if (!isAdded)
             return
@@ -393,6 +412,12 @@ class TimetableDayFragment : BaseFragment<TimetableDayFragmentBinding, MainActiv
                 lb.attendanceIcon.setImageDrawable(icon.toDrawable(color))
                 true
             } ?: false
+
+            val skipDrawable = skipData?.let {
+                app.skipManager.getLessonDrawable(activity, it, lesson)
+            }
+            lb.skipIcon.isVisible = skipDrawable != null
+            lb.skipIcon.setImageDrawable(skipDrawable)
 
             lb.unread = lesson.type != Lesson.TYPE_NORMAL && lesson.showAsUnseen
             if (!lesson.seen) {

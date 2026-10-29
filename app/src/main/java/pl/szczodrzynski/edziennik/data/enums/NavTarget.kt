@@ -31,6 +31,7 @@ import pl.szczodrzynski.edziennik.ui.notifications.NotificationsListFragment
 import pl.szczodrzynski.edziennik.ui.settings.ProfileManagerFragment
 import pl.szczodrzynski.edziennik.ui.settings.SettingsFragment
 import pl.szczodrzynski.edziennik.ui.settings.contributors.ContributorsFragment
+import pl.szczodrzynski.edziennik.ui.skips.SkipsFragment
 import pl.szczodrzynski.edziennik.ui.teachers.TeachersListFragment
 import pl.szczodrzynski.edziennik.ui.template.TemplateFragment
 import pl.szczodrzynski.edziennik.ui.timetable.TimetableFragment
@@ -129,6 +130,15 @@ enum class NavTarget(
         icon = CommunityMaterial.Icon.cmd_calendar_remove_outline,
         popTo = HOME,
         badgeType = MetadataType.ATTENDANCE,
+        featureType = FeatureType.ATTENDANCE,
+    ),
+    SKIPS(
+        id = 19,
+        fragmentClass = SkipsFragment::class.java,
+        location = NavTargetLocation.DRAWER,
+        nameRes = R.string.menu_skips,
+        icon = CommunityMaterial.Icon3.cmd_run,
+        popTo = HOME,
         featureType = FeatureType.ATTENDANCE,
     ),
     ANNOUNCEMENTS(

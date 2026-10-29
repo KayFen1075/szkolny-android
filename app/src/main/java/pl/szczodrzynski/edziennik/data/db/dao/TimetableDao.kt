@@ -102,6 +102,8 @@ abstract class TimetableDao : BaseDao<Lesson, LessonFull> {
             getRawNow("$QUERY WHERE timetable.profileId = $profileId AND $IS_CHANGED AND ((type != 3 AND date = '${date.stringY_m_d}') OR ((type = 3 OR type = 1) AND oldDate = '${date.stringY_m_d}')) $ORDER_BY")
     fun getBetweenDatesNow(dateFrom: Date, dateTo: Date) =
             getRawNow("$QUERY WHERE (type != 3 AND date >= '${dateFrom.stringY_m_d}' AND date <= '${dateTo.stringY_m_d}') OR ((type = 3 OR type = 1) AND oldDate >= '${dateFrom.stringY_m_d}' AND oldDate <= '${dateTo.stringY_m_d}') $ORDER_BY")
+    fun getBetweenDatesNow(profileId: Int, dateFrom: Date, dateTo: Date) =
+            getRawNow("$QUERY WHERE timetable.profileId = $profileId AND ((type != 3 AND date >= '${dateFrom.stringY_m_d}' AND date <= '${dateTo.stringY_m_d}') OR ((type = 3 OR type = 1) AND oldDate >= '${dateFrom.stringY_m_d}' AND oldDate <= '${dateTo.stringY_m_d}')) $ORDER_BY")
 
     // GET ONE - NOW
     fun getByIdNow(profileId: Int, id: Long) =

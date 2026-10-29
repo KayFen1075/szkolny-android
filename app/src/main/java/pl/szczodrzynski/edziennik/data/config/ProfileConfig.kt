@@ -38,6 +38,7 @@ class ProfileConfig(
     val ui by lazy { UI() }
     val sync by lazy { Sync() }
     val attendance by lazy { Attendance() }
+    val skips by lazy { Skips() }
 
     var shareByDefault by config<Boolean>(false)
 
@@ -88,5 +89,25 @@ class ProfileConfig(
         var groupConsecutiveDays by config<Boolean>(true)
         var showPresenceInMonth by config<Boolean>(false)
         var useSymbols by config<Boolean>(false)
+    }
+
+    inner class Skips {
+        var skipsPageSelection by config<Int>(0)
+        var goalPercent by config<Int>(51)
+        // entries in format "subjectId:goalPercent"
+        var subjectGoals by config<List<String>> { listOf() }
+        var excludedSubjects by config<List<Long>> { listOf() }
+        var marginOk by config<Int>(10)
+        var marginEdge by config<Int>(4)
+        var ignoredEventTypes by config<List<Long>> { listOf() }
+        var belatedAsPresence by config<Boolean>(true)
+        var excusedAsPresence by config<Boolean>(false)
+        // entries in format "Y-m-d|HHmmss|subjectId"
+        var plannedSkips by config<List<String>> { listOf() }
+        // entries in format "Y-m-d|Y-m-d|name"
+        var freeDays by config<List<String>> { listOf() }
+        var showInTimetable by config<Boolean>(true)
+        var showInAttendance by config<Boolean>(true)
+        var showInHome by config<Boolean>(true)
     }
 }

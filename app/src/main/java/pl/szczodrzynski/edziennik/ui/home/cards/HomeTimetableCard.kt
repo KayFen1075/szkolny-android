@@ -5,6 +5,9 @@
 package pl.szczodrzynski.edziennik.ui.home.cards
 
 import android.content.Intent
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +28,7 @@ import org.greenrobot.eventbus.ThreadMode
 import pl.szczodrzynski.edziennik.App
 import pl.szczodrzynski.edziennik.MainActivity
 import pl.szczodrzynski.edziennik.R
+import pl.szczodrzynski.edziennik.core.manager.SkipManager
 import pl.szczodrzynski.edziennik.data.api.edziennik.EdziennikTask
 import pl.szczodrzynski.edziennik.data.api.events.ApiTaskAllFinishedEvent
 import pl.szczodrzynski.edziennik.data.db.entity.Event
@@ -145,6 +149,11 @@ class HomeTimetableCard(
             update()
         })
 
+        // refresh the skip icons when the planned skips change
+        app.skipManager.observeUpdates(fragment) {
+            update()
+        }
+
         EventBus.getDefault().register(this)
     }
 
@@ -233,6 +242,11 @@ class HomeTimetableCard(
         lessons = lessons.filter { it.type != Lesson.TYPE_NO_LESSONS }
         lessons.onEach { it.filterNotes() }
 
+        val skipData = if (profile.id == App.profileId && profile.config.skips.showInHome)
+            app.skipManager.getData(profile)
+        else
+            null
+
         b.timetableLayout.visibility = View.VISIBLE
         b.noTimetableLayout.visibility = View.GONE
         b.noLessonsLayout.visibility = View.GONE
@@ -248,6 +262,13 @@ class HomeTimetableCard(
         val skipFirst = if (firstLesson == null) 0 else lessons.indexOf(firstLesson)
         val skipLast = if (lastLesson == null) 0 else lessons.size - 1 - lessons.indexOf(lastLesson)
         val lessonCount = lessons.size - skipFirst - skipLast
+
+        val skipDrawable = if (skipData != null && firstLesson != null)
+            app.skipManager.getLessonDrawable(activity, skipData, firstLesson, sizeDp = 20)
+        else
+            null
+        b.skipIcon.visibility = if (skipDrawable != null) View.VISIBLE else View.GONE
+        b.skipIcon.setImageDrawable(skipDrawable)
 
         if (isToday) {
             // today
@@ -335,15 +356,25 @@ class HomeTimetableCard(
 
         val text = mutableListOf<CharSequence>()
         for (lesson in nextLessons) {
-            text += listOf(
+            text += listOfNotNull(
                     adjustTimeWidth(lesson.displayStartTime?.stringHM),
-                    lesson.subjectSpannable
+                    lesson.subjectSpannable,
+                    skipData?.let { getSkipIconSpan(it, lesson) }
             ).concat(" ")
         }
         if (text.isEmpty())
             text += activity.getString(R.string.home_timetable_later_no_lessons)
         b.nextLessons.text = text.concat("\n")
     }}
+
+    private fun getSkipIconSpan(skipData: SkipManager.SkipData, lesson: LessonFull): CharSequence? {
+        val drawable = app.skipManager.getLessonDrawable(activity, skipData, lesson, sizeDp = 16)
+            ?: return null
+        drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+        return SpannableString(" ").apply {
+            setSpan(ImageSpan(drawable, ImageSpan.ALIGN_BOTTOM), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+    }
 
     private fun adjustTimeWidth(time: String?) = when {
         time == null -> ""

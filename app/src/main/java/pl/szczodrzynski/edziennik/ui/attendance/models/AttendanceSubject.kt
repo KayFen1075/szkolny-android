@@ -4,6 +4,7 @@
 
 package pl.szczodrzynski.edziennik.ui.attendance.models
 
+import pl.szczodrzynski.edziennik.core.manager.SkipManager
 import pl.szczodrzynski.edziennik.data.db.entity.Attendance
 import pl.szczodrzynski.edziennik.data.db.entity.AttendanceType
 import pl.szczodrzynski.edziennik.data.db.full.AttendanceFull
@@ -23,4 +24,5 @@ data class AttendanceSubject(
 
     var typeCountMap: Map<AttendanceType, Int> = mapOf()
     var percentage: Float = 0f
+    var skipStatus: SkipManager.Status? = null
 }

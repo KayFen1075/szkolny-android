@@ -187,6 +187,11 @@ class LibrusData(val data: DataLibrus, val onSuccess: () -> Unit) {
                 data.startProgress(R.string.edziennik_progress_endpoint_teacher_free_days)
                 LibrusApiTeacherFreeDays(data, lastSync, onSuccess)
             }
+            ENDPOINT_LIBRUS_API_SCHOOL_FREE_DAYS,
+            ENDPOINT_LIBRUS_API_CLASS_FREE_DAYS -> {
+                data.startProgress(R.string.edziennik_progress_endpoint_school_free_days)
+                LibrusApiSchoolFreeDays(data, lastSync, endpointId, onSuccess)
+            }
 
             /**
              * SYNERGIA
