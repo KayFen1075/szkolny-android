@@ -560,6 +560,7 @@
     <string name="language_english" translatable="false">English</string>
     <string name="language_german" translatable="false">Deutsch</string>
     <string name="language_polish" translatable="false">Polski</string>
+    <string name="language_russian" translatable="false">Русский</string>
     <string name="language_system">Według systemu</string>
     <string name="lesson_added">Nowa lekcja</string>
     <string name="lesson_break">Przerwa</string>

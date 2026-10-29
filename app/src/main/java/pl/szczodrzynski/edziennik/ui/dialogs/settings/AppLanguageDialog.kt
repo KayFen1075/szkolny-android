@@ -22,6 +22,7 @@ class AppLanguageDialog(
         R.string.language_polish to "pl",
         R.string.language_english to "en",
         R.string.language_german to "de",
+        R.string.language_russian to "ru",
     ).mapKeys { (resId, _) -> activity.getString(resId) }
 
     override fun getDefaultSelectedItem() = app.config.ui.language

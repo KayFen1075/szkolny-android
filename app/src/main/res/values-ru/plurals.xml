@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="time_till_text">
+        <item quantity="one">Через</item>
+        <item quantity="few">Через</item>
+        <item quantity="many">Через</item>
+        <item quantity="other">Через</item>
+    </plurals>
+    <plurals name="time_till_minutes">
+        <item quantity="one">%d минуту</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минуты</item>
+    </plurals>
+    <plurals name="time_till_hours">
+        <item quantity="one">%d час</item>
+        <item quantity="few">%d часа</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часа</item>
+    </plurals>
+    <plurals name="time_till_seconds">
+        <item quantity="one">%d секунду</item>
+        <item quantity="few">%d секунды</item>
+        <item quantity="many">%d секунд</item>
+        <item quantity="other">%d секунды</item>
+    </plurals>
+    <plurals name="time_till_days">
+        <item quantity="one">%d день</item>
+        <item quantity="few">%d дня</item>
+        <item quantity="many">%d дней</item>
+        <item quantity="other">%d дня</item>
+    </plurals>
+    <plurals name="time_till_months">
+        <item quantity="one">%d месяц</item>
+        <item quantity="few">%d месяца</item>
+        <item quantity="many">%d месяцев</item>
+        <item quantity="other">%d месяца</item>
+    </plurals>
+    <plurals name="time_till_years">
+        <item quantity="one">%d год</item>
+        <item quantity="few">%d года</item>
+        <item quantity="many">%d лет</item>
+        <item quantity="other">%d года</item>
+    </plurals>
+    <plurals name="time_left_text">
+        <item quantity="one">Осталась</item>
+        <item quantity="few">Осталось</item>
+        <item quantity="many">Осталось</item>
+        <item quantity="other">Осталось</item>
+    </plurals>
+    <plurals name="time_left_minutes">
+        <item quantity="one">%d минута</item>
+        <item quantity="few">%d минуты</item>
+        <item quantity="many">%d минут</item>
+        <item quantity="other">%d минуты</item>
+    </plurals>
+    <plurals name="time_left_hours">
+        <item quantity="one">%d час</item>
+        <item quantity="few">%d часа</item>
+        <item quantity="many">%d часов</item>
+        <item quantity="other">%d часа</item>
+    </plurals>
+    <plurals name="time_left_seconds">
+        <item quantity="one">%d секунда</item>
+        <item quantity="few">%d секунды</item>
+        <item quantity="many">%d секунд</item>
+        <item quantity="other">%d секунды</item>
+    </plurals>
+    <plurals name="unread_count">
+        <item quantity="one">%d непрочитанное</item>
+        <item quantity="few">%d непрочитанных</item>
+        <item quantity="many">%d непрочитанных</item>
+        <item quantity="other">%d непрочитанных</item>
+    </plurals>
+    <plurals name="toolbar_subtitle_with_unread">
+        <item quantity="one">%1$s - %2$d непрочитанное</item>
+        <item quantity="few">%1$s - %2$d непрочитанных</item>
+        <item quantity="many">%1$s - %2$d непрочитанных</item>
+        <item quantity="other">%1$s - %2$d непрочитанных</item>
+    </plurals>
+    <plurals name="critical_errors_format">
+        <item quantity="one">%d критическая ошибка</item>
+        <item quantity="few">%d критические ошибки</item>
+        <item quantity="many">%d критических ошибок</item>
+        <item quantity="other">%d критической ошибки</item>
+    </plurals>
+    <plurals name="normal_errors_format">
+        <item quantity="one">%d ошибка</item>
+        <item quantity="few">%d ошибки</item>
+        <item quantity="many">%d ошибок</item>
+        <item quantity="other">%d ошибки</item>
+    </plurals>
+    <plurals name="notification_count_format">
+        <item quantity="one">Szkolny.eu: %d новое уведомление</item>
+        <item quantity="few">Szkolny.eu: %d новых уведомления</item>
+        <item quantity="many">Szkolny.eu: %d новых уведомлений</item>
+        <item quantity="other">Szkolny.eu: %d новых уведомления</item>
+    </plurals>
+    <plurals name="notification_count_short_format">
+        <item quantity="one">%d новое уведомление</item>
+        <item quantity="few">%d новых уведомления</item>
+        <item quantity="many">%d новых уведомлений</item>
+        <item quantity="other">%d новых уведомления</item>
+    </plurals>
+    <plurals name="notification_new_timetable_change_format">
+        <item quantity="one">%d изменение в расписании</item>
+        <item quantity="few">%d изменения в расписании</item>
+        <item quantity="many">%d изменений в расписании</item>
+        <item quantity="other">%d изменения в расписании</item>
+    </plurals>
+    <plurals name="notification_new_grades_format">
+        <item quantity="one">%d новая оценка</item>
+        <item quantity="few">%d новые оценки</item>
+        <item quantity="many">%d новых оценок</item>
+        <item quantity="other">%d новой оценки</item>
+    </plurals>
+    <plurals name="notification_new_events_format">
+        <item quantity="one">%d новое событие</item>
+        <item quantity="few">%d новых события</item>
+        <item quantity="many">%d новых событий</item>
+        <item quantity="other">%d новых события</item>
+    </plurals>
+    <plurals name="notification_new_homework_format">
+        <item quantity="one">%d новое домашнее задание</item>
+        <item quantity="few">%d новых домашних задания</item>
+        <item quantity="many">%d новых домашних заданий</item>
+        <item quantity="other">%d новых домашних задания</item>
+    </plurals>
+    <plurals name="notification_new_shared_events_format">
+        <item quantity="one">%d общее событие</item>
+        <item quantity="few">%d общих события</item>
+        <item quantity="many">%d общих событий</item>
+        <item quantity="other">%d общих события</item>
+    </plurals>
+    <plurals name="notification_new_shared_homework_format">
+        <item quantity="one">%d общее домашнее задание</item>
+        <item quantity="few">%d общих домашних задания</item>
+        <item quantity="many">%d общих домашних заданий</item>
+        <item quantity="other">%d общих домашних задания</item>
+    </plurals>
+    <plurals name="notification_new_messages_format">
+        <item quantity="one">%d новое сообщение</item>
+        <item quantity="few">%d новых сообщения</item>
+        <item quantity="many">%d новых сообщений</item>
+        <item quantity="other">%d новых сообщения</item>
+    </plurals>
+    <plurals name="notification_new_notices_format">
+        <item quantity="one">%d новое замечание</item>
+        <item quantity="few">%d новых замечания</item>
+        <item quantity="many">%d новых замечаний</item>
+        <item quantity="other">%d новых замечания</item>
+    </plurals>
+    <plurals name="notification_new_attendance_format">
+        <item quantity="one">%d новая отметка посещаемости</item>
+        <item quantity="few">%d новые отметки посещаемости</item>
+        <item quantity="many">%d новых отметок посещаемости</item>
+        <item quantity="other">%d новой отметки посещаемости</item>
+    </plurals>
+    <plurals name="notification_new_lucky_number_format">
+        <item quantity="one">счастливый номер</item>
+        <item quantity="few">%d счастливых номера</item>
+        <item quantity="many">%d счастливых номеров</item>
+        <item quantity="other">%d счастливых номера</item>
+    </plurals>
+    <plurals name="notification_new_announcements_format">
+        <item quantity="one">%d новое объявление</item>
+        <item quantity="few">%d новых объявления</item>
+        <item quantity="many">%d новых объявлений</item>
+        <item quantity="other">%d новых объявления</item>
+    </plurals>
+    <plurals name="notification_other_format">
+        <item quantity="one">%d другое уведомление</item>
+        <item quantity="few">%d других уведомления</item>
+        <item quantity="many">%d других уведомлений</item>
+        <item quantity="other">%d других уведомления</item>
+    </plurals>
+    <plurals name="grades_format">
+        <item quantity="one">%d оценка</item>
+        <item quantity="few">%d оценки</item>
+        <item quantity="many">%d оценок</item>
+        <item quantity="other">%d оценки</item>
+    </plurals>
+    <plurals name="contributions_quantity">
+        <item quantity="one">%d коммит</item>
+        <item quantity="few">%d коммита</item>
+        <item quantity="many">%d коммитов</item>
+        <item quantity="other">%d коммита</item>
+    </plurals>
+    <plurals name="translations_quantity">
+        <item quantity="one">%d перевод</item>
+        <item quantity="few">%d перевода</item>
+        <item quantity="many">%d переводов</item>
+        <item quantity="other">%d перевода</item>
+    </plurals>
+</resources>
