@@ -62,6 +62,21 @@ android {
         }
     }
 
+    signingConfigs {
+        kayfen {
+            // keystore.properties is not in the repo - see .gitignore
+            def keystoreFile = rootProject.file("keystore.properties")
+            if (keystoreFile.exists()) {
+                def props = new Properties()
+                keystoreFile.withInputStream { props.load(it) }
+                storeFile = file(props["storeFile"])
+                storePassword = props["storePassword"]
+                keyAlias = props["keyAlias"]
+                keyPassword = props["keyPassword"]
+            }
+        }
+    }
+
     flavorDimensions += "platform"
 
     productFlavors {
@@ -72,6 +87,16 @@ android {
 
         official {}
         play {}
+
+        // personal build, installable next to the official app
+        kayfen {
+            applicationIdSuffix = ".kayfen"
+            versionName "${release.versionName}-kayfen"
+            signingConfig = signingConfigs.kayfen
+            firebaseCrashlytics {
+                mappingFileUploadEnabled = false
+            }
+        }
     }
 
     variantFilter { variant ->
@@ -92,6 +117,10 @@ android {
 
         play {
             java.srcDirs = ["src/main/java", "src/play/java"]
+        }
+
+        kayfen {
+            java.srcDirs = ["src/main/java", "src/play-not/java"]
         }
     }
 
@@ -222,6 +251,7 @@ dependencies {
     implementation "eu.szkolny.selective-dao:annotation:6a337f9"
     officialImplementation "eu.szkolny:ssl-provider:1.0.0"
     unofficialImplementation "eu.szkolny:ssl-provider:1.0.0"
+    kayfenImplementation "eu.szkolny:ssl-provider:1.0.0"
 
     implementation "pl.szczodrzynski:numberslidingpicker:2921225f76"
     implementation "pl.szczodrzynski:recyclertablayout:700f980584"

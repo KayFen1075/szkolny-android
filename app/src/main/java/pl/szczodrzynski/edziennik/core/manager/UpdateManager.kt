@@ -33,6 +33,8 @@ class UpdateManager(val app: App) : CoroutineScope {
     fun isApplicable(update: Update): Boolean {
         if (app.buildManager.isDebug)
             return false // no updates on debug
+        if (app.buildManager.buildFlavor == "kayfen")
+            return false // personal build, official updates would install as another app
         if (update.versionCode > BuildConfig.VERSION_CODE)
             return true
         if (update.versionCode < BuildConfig.VERSION_CODE)

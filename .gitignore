@@ -266,3 +266,4 @@ fabric.properties
 
 signatures/
 .idea/*.xml
+keystore.properties
