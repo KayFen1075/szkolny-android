@@ -16,6 +16,28 @@
 
 </div>
 
+## Szkolny+ (fork)
+
+> **Это неофициальная версия Szkolny.eu от [KayFen1075](https://github.com/KayFen1075).**
+> To nieoficjalna wersja Szkolny.eu, nie jest powiązana z autorami aplikacji.
+
+### ⬇️ [Скачать APK / Pobierz APK](https://github.com/KayFen1075/szkolny-android/releases/latest)
+
+Ставится **рядом** с официальным Szkolny.eu, ничего в нём не ломает. / Instaluje się **obok** oficjalnej aplikacji.
+
+### Что нового / Co nowego
+
+- 🏃 **Прогулы (Wagary)** — возле каждого урока видно, можно ли его прогулять, чтобы не опуститься ниже цели посещаемости (по умолчанию 51%):
+  😎 пофиг · ✅ можно · ⚠️ нежелательно · 🟠 на грани · ⛔ запрещено · 💀 уже не спасти
+- Планирование прогулов прямо из расписания, учёт контрольных/ДЗ/событий на уроке
+- Подсчёт оставшихся уроков до конца семестра с учётом каникул и праздников (из Librus, по закону и вручную)
+- Своя цель для каждого предмета, можно не учитывать предмет
+- Исправлена ошибка синхронизации Librus **147** (TeacherFreeDays)
+
+Код новых функций — в ветке [`feature/skips`](https://github.com/KayFen1075/szkolny-android/tree/feature/skips).
+
+---
+
 ## Ważna informacja
 
 Jak zapewne już wiecie, we wrześniu 2020 r. **firma Librus zabroniła nam** publikowania w sklepie Google Play naszej aplikacji z obsługą dziennika Librus&reg; Synergia. Prowadziliśmy rozmowy, aby **umożliwić Wam wygodny, bezpłatny dostęp do Waszych ocen, wiadomości, zadań domowych**, jednak oczekiwania firmy Librus zdecydowanie przekroczyły wszelkie nasze możliwości finansowe. Mając na uwadze powyższe względy, zdecydowaliśmy się opublikować kod źródłowy aplikacji Szkolny.eu. Liczymy, że dzięki temu aplikacja będzie mogła dalej funkcjonować, być rozwijana, pomagając Wam w czasie zdalnego nauczania i przez kolejne lata nauki.
